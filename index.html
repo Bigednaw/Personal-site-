@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Olawande Adeyefa | Project Coordinator — Project Controls & Module Fab</title>
+<meta name="description" content="Project Coordinator with a civil engineering background (EIT, PMP) supporting industrial and energy sector construction and fabrication projects." />
+
+<style>
+  /* ============================================================
+     DESIGN TOKENS — Apple-inspired palette, per the brief
+     ============================================================ */
+  :root{
+    --white:      #ffffff;
+    --off-white:  #f5f5f7;
+    --black:      #1d1d1f;
+    --gray:       #86868b;
+    --light-gray: #d2d2d7;
+    --accent:     #0071e3;   /* Apple's signature interactive blue */
+    --accent-dark:#0058b0;
+    --line:       rgba(29,29,31,0.08);
+
+    --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Helvetica Neue", Arial, sans-serif;
+    --font-text:    -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Helvetica Neue", Arial, sans-serif;
+
+    --max-w: 1280px;
+    --pad-x: 80px;
+    --section-y: 140px;
+  }
+
+  @media (max-width: 900px){
+    :root{ --pad-x: 24px; --section-y: 80px; }
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    font-family:var(--font-text);
+    color:var(--black);
+    background:var(--white);
+    -webkit-font-smoothing:antialiased;
+    line-height:1.5;
+  }
+  a{ color:inherit; text-decoration:none; }
+  img{ max-width:100%; display:block; }
+  button{ font-family:inherit; cursor:pointer; }
+  ::selection{ background:var(--accent); color:#fff; }
+  :focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+
+  .wrap{ max-width:var(--max-w); margin:0 auto; padding:0 var(--pad-x); }
+  .section{ padding:var(--section-y) 0; }
+  .section--alt{ background:var(--off-white); }
+  .eyebrow{
+    font-size:13px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--accent); margin:0 0 12px;
+  }
+  h1,h2,h3,h4{ font-family:var(--font-display); font-weight:600; letter-spacing:-0.02em; margin:0; }
+  h2{ font-size:clamp(32px,4vw,48px); }
+  h3{ font-size:22px; }
+  p{ color:var(--gray); margin:0; }
+  .lede{ font-size:clamp(18px,2vw,22px); color:var(--gray); max-width:640px; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation:none !important; transition:none !important; scroll-behavior:auto !important; }
+  }
+
+  /* ---------------- Nav ---------------- */
+  header{
+    position:sticky; top:0; z-index:100;
+    background:rgba(255,255,255,0.8);
+    backdrop-filter:saturate(180%) blur(20px);
+    -webkit-backdrop-filter:saturate(180%) blur(20px);
+    border-bottom:1px solid var(--line);
+  }
+  nav.wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:52px;
+  }
+  .brand{ font-weight:600; font-size:15px; }
+  .navlinks{ display:flex; gap:28px; list-style:none; margin:0; padding:0; }
+  .navlinks a{ font-size:13px; color:var(--black); opacity:0.85; }
+  .navlinks a:hover{ opacity:1; }
+  .nav-cta{
+    background:var(--accent); color:#fff; padding:6px 14px; border-radius:980px; font-size:13px;
+  }
+  .nav-toggle{ display:none; background:none; border:0; font-size:20px; }
+  @media (max-width: 900px){
+    .navlinks{
+      position:fixed; top:52px; left:0; right:0; background:var(--white);
+      flex-direction:column; padding:16px var(--pad-x); border-bottom:1px solid var(--line);
+      display:none; gap:16px;
+    }
+    .navlinks.open{ display:flex; }
+    .nav-toggle{ display:block; }
+  }
+
+  /* ---------------- Hero ---------------- */
+  .hero{
+    position:relative; overflow:hidden;
+    padding:160px 0 120px;
+    text-align:center;
+    background:linear-gradient(180deg,#ffffff 0%, var(--off-white) 100%);
+  }
+  .hero::before{
+    content:""; position:absolute; inset:-20% -10% auto -10%; height:600px;
+    background:radial-gradient(circle at 30% 30%, rgba(0,113,227,0.16), transparent 60%),
+               radial-gradient(circle at 70% 60%, rgba(29,29,31,0.06), transparent 55%);
+    filter:blur(20px);
+    animation:drift 18s ease-in-out infinite alternate;
+    z-index:0;
+  }
+  @keyframes drift{ from{ transform:translateY(0) scale(1);} to{ transform:translateY(30px) scale(1.05);} }
+  .hero > *{ position:relative; z-index:1; }
+  .hero h1{ font-size:clamp(40px,6vw,72px); margin-bottom:12px; }
+  .hero .role{ font-size:clamp(20px,2.4vw,28px); color:var(--gray); font-weight:500; margin-bottom:20px; }
+  .hero .lede{ margin:0 auto 40px; }
+  .hero-photo{
+    width:168px; height:168px; border-radius:50%; margin:0 auto 32px;
+    background:linear-gradient(135deg,#e2e2e6,#c9c9ce);
+    display:flex; align-items:center; justify-content:center;
+    font-size:13px; color:var(--gray); border:1px solid var(--line);
+  }
+  .btn-row{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+  .btn{
+    padding:12px 24px; border-radius:980px; font-size:15px; font-weight:500;
+    border:1px solid transparent; transition:transform .15s ease, background .15s ease;
+    display:inline-block;
+  }
+  .btn:hover{ transform:translateY(-1px); }
+  .btn-primary{ background:var(--accent); color:#fff; }
+  .btn-primary:hover{ background:var(--accent-dark); }
+  .btn-secondary{ background:var(--black); color:#fff; }
+  .btn-ghost{ background:transparent; border-color:var(--light-gray); color:var(--black); }
+
+  /* ---------------- Highlights ---------------- */
+  .stats{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:16px;
+    margin-top:-64px; position:relative; z-index:2;
+  }
+  @media (max-width:900px){ .stats{ grid-template-columns:repeat(2,1fr);} }
+  .stat-card{
+    background:var(--white); border:1px solid var(--line); border-radius:26px;
+    padding:28px 20px; text-align:center; box-shadow:0 20px 40px rgba(0,0,0,0.05);
+  }
+  .stat-card .num{ font-family:var(--font-display); font-size:30px; font-weight:700; }
+  .stat-card .label{ font-size:13px; color:var(--gray); margin-top:4px; }
+
+  /* ---------------- Grids / Cards ---------------- */
+  .grid-3{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:56px; }
+  .grid-2{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:60px; align-items:start; margin-top:56px; }
+  @media (max-width:900px){ .grid-3{ grid-template-columns:1fr; } .grid-2{ grid-template-columns:1fr; } }
+  .card{
+    background:var(--white); border:1px solid var(--line); border-radius:28px; padding:32px;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .card:hover{ transform:translateY(-4px); box-shadow:0 20px 40px rgba(0,0,0,0.08); }
+  .card h3{ margin-bottom:8px; }
+  .card p{ font-size:15px; }
+  .icon-badge{
+    width:48px; height:48px; border-radius:16px; background:var(--off-white);
+    display:flex; align-items:center; justify-content:center; margin-bottom:18px; font-size:20px;
+  }
+
+  /* ---------------- About ---------------- */
+  .about-block + .about-block{ margin-top:36px; }
+  .about-block h4{ margin-bottom:8px; font-size:17px; }
+  .cert-list{ list-style:none; padding:0; margin:16px 0 0; display:flex; flex-wrap:wrap; gap:10px; }
+  .cert-list li{
+    font-size:13px; padding:8px 14px; border-radius:980px; background:var(--white);
+    border:1px solid var(--line); color:var(--black);
+  }
+
+  /* ---------------- Experience timeline ---------------- */
+  .timeline{ margin-top:56px; border-left:2px solid var(--line); padding-left:32px; }
+  .tl-item{ position:relative; padding-bottom:44px; }
+  .tl-item:last-child{ padding-bottom:0; }
+  .tl-item::before{
+    content:""; position:absolute; left:-38px; top:4px; width:12px; height:12px;
+    border-radius:50%; background:var(--accent); border:3px solid var(--white); box-shadow:0 0 0 2px var(--accent);
+  }
+  .tl-header{ display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px; cursor:pointer; }
+  .tl-header .role{ font-size:19px; font-weight:600; font-family:var(--font-display); }
+  .tl-header .period{ font-size:13px; color:var(--gray); }
+  .tl-company{ font-size:14px; color:var(--gray); margin-top:2px; }
+  .tl-body{
+    max-height:0; overflow:hidden; transition:max-height .35s ease;
+    font-size:15px; color:var(--gray);
+  }
+  .tl-item.open .tl-body{ max-height:240px; margin-top:14px; }
+  .tl-toggle{ font-size:13px; color:var(--accent); margin-top:8px; display:inline-block; }
+
+  /* ---------------- Skills ---------------- */
+  .skills-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:28px; margin-top:56px; }
+  @media (max-width:900px){ .skills-grid{ grid-template-columns:1fr; } }
+  .skill-group h4{ font-size:15px; margin-bottom:20px; }
+  .skill-row{ margin-bottom:16px; }
+  .skill-row:last-child{ margin-bottom:0; }
+  .skill-row-top{ display:flex; justify-content:space-between; font-size:14px; margin-bottom:6px; }
+  .skill-row-top .pct{ color:var(--gray); font-size:13px; }
+  .skill-track{ height:8px; border-radius:980px; background:var(--off-white); overflow:hidden; }
+  .skill-fill{ height:100%; border-radius:980px; background:var(--accent); width:0; transition:width 1s cubic-bezier(.4,0,.2,1); }
+
+  /* ---------------- Projects ---------------- */
+  .project-card{
+    background:var(--white); border:1px solid var(--line); border-radius:30px; overflow:hidden;
+    display:grid; grid-template-columns:1fr; margin-top:24px;
+  }
+  .project-shot{
+    height:220px; background:linear-gradient(135deg,var(--off-white),#e7e7ea);
+    display:flex; align-items:center; justify-content:center; color:var(--gray); font-size:13px;
+  }
+  .project-body{ padding:28px 32px; }
+  .project-meta{ display:flex; flex-wrap:wrap; gap:8px; margin:14px 0; }
+  .tag{ font-size:12px; padding:6px 12px; border-radius:980px; background:var(--off-white); color:var(--black); }
+  .outcome{
+    margin-top:14px; padding:12px 16px; border-left:3px solid var(--accent);
+    background:var(--off-white); font-size:14px; color:var(--black); border-radius:0 14px 14px 0;
+  }
+
+  /* ---------------- Interests ---------------- */
+  .interest-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:56px; }
+  @media (max-width:900px){ .interest-grid{ grid-template-columns:repeat(2,1fr); } }
+  .interest-card{
+    aspect-ratio:1/0.85; border-radius:26px; background:var(--off-white);
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px;
+    font-size:14px; font-weight:500; transition:transform .2s ease, background .2s ease;
+    border:1px solid var(--line);
+  }
+  .interest-card:hover{ transform:translateY(-4px) scale(1.02); background:var(--white); }
+  .interest-card .emoji{ font-size:28px; }
+
+  /* ---------------- Forms ---------------- */
+  .form-card{
+    background:var(--white); border:1px solid var(--line); border-radius:30px; padding:36px;
+    max-width:520px;
+  }
+  .form-card.wide{ max-width:680px; }
+  .field{ margin-bottom:16px; }
+  .field label{ display:block; font-size:13px; font-weight:500; margin-bottom:6px; }
+  .field input, .field textarea{
+    width:100%; padding:14px 16px; border-radius:14px; border:1px solid var(--light-gray);
+    font-size:15px; font-family:inherit; background:var(--off-white); color:var(--black);
+  }
+  .field textarea{ min-height:110px; resize:vertical; }
+  .field input:focus, .field textarea:focus{ outline:2px solid var(--accent); background:var(--white); }
+  .form-msg{ font-size:14px; margin-top:14px; padding:12px 14px; border-radius:14px; display:none; }
+  .form-msg.show{ display:block; }
+  .form-msg.ok{ background:#e8f6ea; color:#1f7a34; }
+  .form-msg.err{ background:#fdecec; color:#b3261e; }
+  .split{ display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:start; margin-top:56px; }
+  @media (max-width:900px){ .split{ grid-template-columns:1fr; } }
+  .step-list{ list-style:none; margin:0; padding:0; counter-reset:step; }
+  .step-list li{
+    counter-increment:step; position:relative; padding:0 0 22px 40px; font-size:14px; color:var(--gray);
+  }
+  .step-list li::before{
+    content:counter(step); position:absolute; left:0; top:-2px; width:24px; height:24px;
+    border-radius:50%; background:var(--black); color:#fff; font-size:12px; font-weight:600;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .step-list li b{ color:var(--black); display:block; margin-bottom:2px; }
+
+  /* ---------------- Footer ---------------- */
+  footer{ background:var(--black); color:var(--light-gray); padding:56px 0 32px; }
+  footer .wrap{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:24px; }
+  footer a{ color:var(--light-gray); font-size:13px; }
+  footer .cols{ display:flex; gap:56px; flex-wrap:wrap; }
+  footer .col h5{ font-size:13px; color:#fff; margin:0 0 12px; font-weight:600; }
+  footer .col ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px; }
+  .fine{ font-size:12px; color:var(--gray); margin-top:32px; border-top:1px solid rgba(255,255,255,0.1); padding-top:20px; }
+
+  .section-head{ max-width:640px; }
+</style>
+</head>
+<body>
+
+<!-- ================================================================
+     EDITABLE CONTENT — everything on this page is generated from
+     the SITE object below. Edit the values here to update the
+     whole site: no need to touch the HTML/CSS or hunt for scattered
+     placeholder text anywhere else in this file.
+     ================================================================ -->
+<script>
+const SITE = {
+  brand: "Olawande Adeyefa",
+  name: "Olawande Adeyefa",
+  role: "Project Coordinator | Project Controls | Module Fabrication",
+  tagline: "Supporting industrial and energy sector construction and fabrication projects valued up to $80M+ combined — from cost control and scheduling to field and document coordination.",
+  email: "adeyefawande@yahoo.com",
+  phone: "(403) 926-9554",
+  location: "Calgary, Alberta, Canada",
+  calendlyUrl: "https://calendly.com/your-handle/intro-call", // swap for your real Calendly / Microsoft Bookings link
+  socials: [
+    { label: "LinkedIn", url: "https://linkedin.com/in/your-handle" }, // add your real LinkedIn URL
+  ],
+
+  highlights: [
+    { num: "2+", label: "Years Experience" },
+    { num: "$80M+", label: "Combined Project Value" },
+    { num: "PMP · EIT", label: "Certified" },
+    { num: "Multi-Project", label: "Coordination" },
+  ],
+
+  about: {
+    journey: "I started in civil engineering, earning a B.Eng. from Afe Babalola University before working as a Field Civil Engineer in Lagos, Nigeria, tracking site progress and coordinating crews on civil construction works. I moved to Calgary to complete an M.Eng. in Civil Engineering with a focus on Project Management at the University of Calgary, and since 2023 I've worked as a Project Coordinator at Alstar Group, supporting industrial construction and module fabrication projects across the oil and gas sector — from cost tracking and scheduling to procurement and document control.",
+    philosophy: "Placeholder: replace with your own leadership approach — for example, how you keep project teams aligned across owner, subcontractor, and general contractor interfaces, and how you make sure issues get resolved before they impact schedule.",
+    education: [
+      { degree: "M.Eng., Civil Engineering (Project Management)", school: "University of Calgary", period: "Apr 2023" },
+      { degree: "B.Eng., Civil Engineering", school: "Afe Babalola University", period: "Oct 2019" },
+    ],
+    certifications: [
+      "Engineer-in-Training (EIT), APEGA #298997",
+      "Project Management Professional (PMP)",
+      "Common Safety Orientation (CSO) — Energy Safety Canada",
+      "Construction Safety Training System (CSTS 2020)",
+    ],
+  },
+
+  experience: [
+    { role: "Project Coordinator", company: "Alstar Group — Calgary, AB", period: "May 2023 — Present",
+      detail: "Supporting Project and Construction Managers on industrial construction projects in shop and field, keeping delivery aligned with contract documents and budgets while developing and managing schedules in Primavera. Prepared pipe and material takeoffs and priced estimates that contributed directly to project awards on competitive bids. Built and priced change orders, maintaining change order logs to keep budgets current and audit-ready. Reviewed supplier and sub-trade quotations during procurement, supporting monthly cost reports and budget-vs-actuals tracking. Maintained RFI logs and vendor documentation, coordinating with Project Engineers, subcontractors, and suppliers to resolve scope questions before they affected schedule. Tracked deficiencies and supported field teams during daily shop meetings on projects up to $20M CAD." },
+    { role: "Field Civil Engineer", company: "Joladia Nigerian Limited — Lagos, Nigeria", period: "Nov 2019 — Oct 2020",
+      detail: "Performed field inspections and tracked progress against schedules and contract documents on civil construction works. Maintained daily site records covering labor productivity, material usage, and activity sequencing. Coordinated between site crews, subcontractors, and engineering teams to resolve technical and QA/QC issues, supporting deficiency close-out and safe work practices." },
+  ],
+
+  projects: [
+    { title: "CNRL GEN3 SAGD Program & GEN4 CSS Program", stack: ["Primavera P6", "Cost Forecasting", "RFI Management"],
+      desc: "Project Coordinator for mechanical, pipe spool, and skid fabrication across two concurrent programs in Alberta.",
+      outcome: "$15M+ CAD (GEN3) and $20M+ CAD (GEN4) — tracked cost, schedule, and forecasting; coordinated subcontractors and vendors; maintained RFIs, contract documentation, and drawing review/submission across both programs." },
+    { title: "Shell Well Pad Program", stack: ["Subcontractor Coordination", "Schedule Tracking", "Change Orders"],
+      desc: "Project Coordinator for well pad construction and mechanical works.",
+      outcome: "$18M+ CAD — maintained project administration files, supported subcontractor coordination and schedule tracking, and built cost estimates for change orders." },
+    { title: "Cenovus Pipe Spool Fabrication & Enerflex Wolf Modules", stack: ["Material Takeoffs", "Primavera P6", "Supplier Coordination"],
+      desc: "Project Coordinator preparing material takeoffs and quantity-based pricing across two fabrication projects.",
+      outcome: "$3M+ CAD and $5M+ CAD — supported cost tracking and forecasting, coordinated suppliers and internal drafting teams, and built and managed schedules using Primavera P6." },
+  ],
+
+  skills: {
+    technical: [
+      { name: "Pipe & Material Takeoffs", level: 90 },
+      { name: "Drawing / Contract Document Review", level: 85 },
+      { name: "QA/QC & Deficiency Tracking", level: 80 },
+      { name: "Civil Construction Inspection", level: 80 },
+    ],
+    projectManagement: [
+      { name: "Scheduling (Primavera P6)", level: 90 },
+      { name: "Cost Tracking & Forecasting", level: 90 },
+      { name: "Change Order Management", level: 85 },
+      { name: "Procurement & Estimating", level: 85 },
+    ],
+    software: [
+      { name: "Primavera P6", level: 90 },
+      { name: "MS Project", level: 75 },
+      { name: "AutoCAD", level: 65 },
+      { name: "MS Excel / Office", level: 90 },
+    ],
+    soft: [
+      { name: "Stakeholder Coordination", level: 90 },
+      { name: "Communication", level: 85 },
+      { name: "Problem Solving", level: 85 },
+      { name: "Attention to Detail", level: 90 },
+    ],
+  },
+
+  interests: [
+    { emoji: "📚", label: "Reading & Personal Development" },
+    { emoji: "🧠", label: "Continuous Learning" },
+    { emoji: "🎯", label: "Goal Setting" },
+    { emoji: "🤝", label: "Mentorship" },
+    { emoji: "🏗️", label: "Structural Design" },
+    { emoji: "🏋️", label: "Fitness" },
+    { emoji: "🌍", label: "Travel" },
+    { emoji: "🎙️", label: "Networking" },
+  ],
+
+  workWithMe: [
+    { title: "Project Controls & Scheduling", desc: "Building and managing schedules in Primavera P6, tracking progress against contract documents." },
+    { title: "Cost Tracking & Change Orders", desc: "Cost reports, budget-vs-actuals tracking, and pricing change orders to keep budgets audit-ready." },
+    { title: "Document & RFI Management", desc: "RFI logs, vendor documentation, and drawing review/submission across concurrent projects." },
+    { title: "Field & Shop Coordination", desc: "Keeping owner, subcontractor, and general contractor interfaces aligned so issues move to resolution fast." },
+  ],
+};
+</script>
+
+<header>
+  <nav class="wrap">
+    <div class="brand" id="brand-name"></div>
+    <ul class="navlinks" id="navlinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#interests">Interests</a></li>
+      <li><a href="#work-with-me">Core Strengths</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#meeting" class="nav-cta">Book a Meeting</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
+  </nav>
+</header>
+
+<!-- ========== HOME / HERO ========== -->
+<section class="hero" id="home">
+  <div class="wrap">
+    <div class="hero-photo" id="hero-photo">Headshot</div>
+    <h1 id="hero-name"></h1>
+    <p class="role" id="hero-role"></p>
+    <p class="lede" id="hero-tagline" style="margin-left:auto;margin-right:auto;"></p>
+    <div class="btn-row">
+      <a href="#experience" class="btn btn-primary">View Experience</a>
+      <a href="#work-with-me" class="btn btn-secondary">Core Strengths</a>
+      <a href="#resume" class="btn btn-ghost">Request Resume</a>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="stats" id="stats"></div>
+</div>
+
+<!-- ========== ABOUT ========== -->
+<section class="section section--alt" id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">About</p>
+      <h2>The story so far</h2>
+    </div>
+    <div class="grid-2">
+      <div>
+        <div class="about-block">
+          <h4>Professional Journey</h4>
+          <p id="about-journey"></p>
+        </div>
+        <div class="about-block">
+          <h4>Leadership Philosophy</h4>
+          <p id="about-philosophy"></p>
+        </div>
+      </div>
+      <div class="card">
+        <h4>Education</h4>
+        <ul class="cert-list" id="edu-list" style="margin-bottom:24px;"></ul>
+        <h4>Certifications</h4>
+        <ul class="cert-list" id="cert-list"></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== EXPERIENCE ========== -->
+<section class="section" id="experience">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Experience</p>
+      <h2>Career timeline</h2>
+    </div>
+    <div class="timeline" id="timeline"></div>
+  </div>
+</section>
+
+<!-- ========== SKILLS ========== -->
+<section class="section section--alt" id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Skills</p>
+      <h2>What I bring to a project</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="card skill-group">
+        <h4>Technical &amp; Engineering</h4>
+        <div id="skills-technical"></div>
+      </div>
+      <div class="card skill-group">
+        <h4>Project Management</h4>
+        <div id="skills-pm"></div>
+      </div>
+      <div class="card skill-group">
+        <h4>Software</h4>
+        <div id="skills-software"></div>
+      </div>
+      <div class="card skill-group">
+        <h4>Soft Skills</h4>
+        <div id="skills-soft"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== PROJECTS ========== -->
+<section class="section" id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Projects</p>
+      <h2>Selected work</h2>
+    </div>
+    <div id="projects-list"></div>
+  </div>
+</section>
+
+<!-- ========== INTERESTS ========== -->
+<section class="section section--alt" id="interests">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Beyond Work</p>
+      <h2>Interests</h2>
+    </div>
+    <div class="interest-grid" id="interests-grid"></div>
+  </div>
+</section>
+
+<!-- ========== WORK WITH ME ========== -->
+<section class="section" id="work-with-me">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Core Strengths</p>
+      <h2>Ways we can work together</h2>
+    </div>
+    <div class="grid-3" id="wwm-grid"></div>
+  </div>
+</section>
+
+<!-- ========== RESUME REQUEST ========== -->
+<section class="section section--alt" id="resume">
+  <div class="wrap split">
+    <div>
+      <p class="eyebrow">Resume</p>
+      <h2>Request my resume</h2>
+      <p class="lede" style="margin:16px 0 24px;">I don't publish my resume for direct download. Instead, confirm your email and I'll send it your way — it keeps things spam-free and lets me know who's asking.</p>
+      <ol class="step-list">
+        <li><b>Enter your email</b>Tell me where to send it.</li>
+        <li><b>Confirm your address</b>Click the link in the verification email.</li>
+        <li><b>Receive the resume</b>It lands straight in your inbox.</li>
+      </ol>
+    </div>
+    <form class="form-card" id="resume-form" novalidate>
+      <div class="field"><label for="res-email">Email Address</label><input id="res-email" name="email" type="email" required /></div>
+      <button type="submit" class="btn btn-primary" style="width:100%;">Request Resume</button>
+      <div class="form-msg" id="res-msg"></div>
+    </form>
+  </div>
+</section>
+
+<!-- ========== NEWSLETTER ========== -->
+<section class="section" id="newsletter">
+  <div class="wrap" style="text-align:center;">
+    <p class="eyebrow">Newsletter</p>
+    <h2>Insights on project controls, construction coordination, and career growth</h2>
+    <form id="newsletter-form" novalidate style="display:flex; gap:10px; max-width:440px; margin:32px auto 0; flex-wrap:wrap; justify-content:center;">
+      <input id="nl-email" name="email" type="email" placeholder="you@company.com" required
+        style="flex:1; min-width:220px; padding:12px 16px; border-radius:980px; border:1px solid var(--light-gray); background:var(--off-white); font-size:15px;" />
+      <button type="submit" class="btn btn-primary">Subscribe</button>
+    </form>
+    <div class="form-msg" id="nl-msg" style="max-width:440px; margin:14px auto 0;"></div>
+  </div>
+</section>
+
+<!-- ========== CONTACT ========== -->
+<section class="section section--alt" id="contact">
+  <div class="wrap split">
+    <div>
+      <p class="eyebrow">Contact</p>
+      <h2>Let's talk</h2>
+      <p class="lede" style="margin-top:16px;">Questions, opportunities, or just want to say hello — send a message and I'll get back to you personally.</p>
+      <p style="margin-top:24px; font-size:14px;" id="contact-email"></p>
+    </div>
+    <form class="form-card wide" id="contact-form" novalidate>
+      <div class="field"><label for="ct-name">Name</label><input id="ct-name" name="name" required /></div>
+      <div class="field"><label for="ct-email">Email</label><input id="ct-email" name="email" type="email" required /></div>
+      <div class="field"><label for="ct-company">Company</label><input id="ct-company" name="company" /></div>
+      <div class="field"><label for="ct-message">Message</label><textarea id="ct-message" name="message" required></textarea></div>
+      <button type="submit" class="btn btn-primary" style="width:100%;">Send Message</button>
+      <div class="form-msg" id="ct-msg"></div>
+    </form>
+  </div>
+</section>
+
+<!-- ========== BOOK A MEETING ========== -->
+<section class="section" id="meeting" style="text-align:center;">
+  <div class="wrap">
+    <p class="eyebrow">Book a Meeting</p>
+    <h2>Let's find time to talk</h2>
+    <p class="lede" style="margin:16px auto 32px;">Pick a slot that works for you — no back-and-forth emails needed.</p>
+    <a id="calendly-link" class="btn btn-primary" target="_blank" rel="noopener">Open Scheduling Page</a>
+    <p style="font-size:13px; margin-top:14px; color:var(--gray);">Replace the scheduling link in <code>SITE.calendlyUrl</code> with your Calendly or Microsoft Bookings page.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <div class="brand" style="color:#fff;" id="footer-brand"></div>
+      <p style="font-size:13px; margin-top:10px; max-width:260px;" id="footer-tagline"></p>
+    </div>
+    <div class="cols">
+      <div class="col">
+        <h5>Site</h5>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="col">
+        <h5>Connect</h5>
+        <ul id="footer-socials"></ul>
+      </div>
+    </div>
+  </div>
+  <div class="wrap fine" id="footer-fine"></div>
+</footer>
+
+<script>
+(function(){
+  // ---------- helpers ----------
+  const $ = (id) => document.getElementById(id);
+  const el = (tag, cls, html) => { const e = document.createElement(tag); if(cls) e.className = cls; if(html !== undefined) e.innerHTML = html; return e; };
+
+  // ---------- nav ----------
+  $("brand-name").textContent = SITE.brand;
+  $("footer-brand").textContent = SITE.brand;
+  $("footer-tagline").textContent = SITE.tagline;
+  $("footer-fine").textContent = "© " + new Date().getFullYear() + " " + SITE.brand + ". All rights reserved.";
+  $("navToggle").addEventListener("click", () => $("navlinks").classList.toggle("open"));
+
+  const socialsUl = $("footer-socials");
+  SITE.socials.forEach(s => {
+    const li = el("li");
+    const a = el("a", null, s.label);
+    a.href = s.url; a.target = "_blank"; a.rel = "noopener";
+    li.appendChild(a);
+    socialsUl.appendChild(li);
+  });
+
+  // ---------- hero ----------
+  $("hero-name").textContent = SITE.name;
+  $("hero-role").textContent = SITE.role;
+  $("hero-tagline").textContent = SITE.tagline;
+  $("contact-email").textContent = "Prefer email? Reach me directly at " + SITE.email;
+
+  // ---------- stats ----------
+  const statsEl = $("stats");
+  SITE.highlights.forEach(h => {
+    const card = el("div", "stat-card");
+    card.innerHTML = `<div class="num">${h.num}</div><div class="label">${h.label}</div>`;
+    statsEl.appendChild(card);
+  });
+
+  // ---------- about ----------
+  $("about-journey").textContent = SITE.about.journey;
+  $("about-philosophy").textContent = SITE.about.philosophy;
+  const eduList = $("edu-list");
+  SITE.about.education.forEach(e => {
+    const li = el("li", null, `${e.degree} — ${e.school} (${e.period})`);
+    eduList.appendChild(li);
+  });
+  const certList = $("cert-list");
+  SITE.about.certifications.forEach(c => {
+    const li = el("li", null, c);
+    certList.appendChild(li);
+  });
+
+  // ---------- skills ----------
+  function renderSkills(containerId, list){
+    const container = $(containerId);
+    list.forEach(s => {
+      const row = el("div", "skill-row");
+      row.innerHTML = `
+        <div class="skill-row-top"><span>${s.name}</span><span class="pct">${s.level}%</span></div>
+        <div class="skill-track"><div class="skill-fill" style="width:${s.level}%"></div></div>
+      `;
+      container.appendChild(row);
+    });
+  }
+  renderSkills("skills-technical", SITE.skills.technical);
+  renderSkills("skills-pm", SITE.skills.projectManagement);
+  renderSkills("skills-software", SITE.skills.software);
+  renderSkills("skills-soft", SITE.skills.soft);
+
+  // ---------- experience timeline ----------
+  const timeline = $("timeline");
+  SITE.experience.forEach((job, i) => {
+    const item = el("div", "tl-item" + (i === 0 ? " open" : ""));
+    item.innerHTML = `
+      <div class="tl-header">
+        <div>
+          <div class="role">${job.role}</div>
+          <div class="tl-company">${job.company}</div>
+        </div>
+        <div class="period">${job.period}</div>
+      </div>
+      <div class="tl-body"><p style="color:inherit;">${job.detail}</p></div>
+      <span class="tl-toggle">${i === 0 ? "Hide details" : "View details"}</span>
+    `;
+    const toggle = () => {
+      item.classList.toggle("open");
+      item.querySelector(".tl-toggle").textContent = item.classList.contains("open") ? "Hide details" : "View details";
+    };
+    item.querySelector(".tl-header").addEventListener("click", toggle);
+    item.querySelector(".tl-toggle").addEventListener("click", toggle);
+    timeline.appendChild(item);
+  });
+
+  // ---------- projects ----------
+  const projectsList = $("projects-list");
+  SITE.projects.forEach(p => {
+    const card = el("div", "project-card");
+    card.innerHTML = `
+      <div class="project-shot">Project screenshot placeholder</div>
+      <div class="project-body">
+        <h3>${p.title}</h3>
+        <p>${p.desc}</p>
+        <div class="project-meta">${p.stack.map(t => `<span class="tag">${t}</span>`).join("")}</div>
+        <div class="outcome">${p.outcome}</div>
+      </div>
+    `;
+    projectsList.appendChild(card);
+  });
+
+  // ---------- interests ----------
+  const interestsGrid = $("interests-grid");
+  SITE.interests.forEach(i => {
+    const card = el("div", "interest-card");
+    card.innerHTML = `<span class="emoji">${i.emoji}</span><span>${i.label}</span>`;
+    interestsGrid.appendChild(card);
+  });
+
+  // ---------- work with me ----------
+  const wwmGrid = $("wwm-grid");
+  SITE.workWithMe.forEach(w => {
+    const card = el("div", "card");
+    card.innerHTML = `<h3>${w.title}</h3><p>${w.desc}</p>`;
+    wwmGrid.appendChild(card);
+  });
+
+  // ---------- meeting ----------
+  $("calendly-link").href = SITE.calendlyUrl;
+
+  // ---------- forms (demo behavior — see README to wire up a real backend) ----------
+  function handleForm(formId, msgId, successText){
+    const form = $(formId), msg = $(msgId);
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const required = form.querySelectorAll("[required]");
+      let valid = true;
+      required.forEach(f => { if(!f.value.trim()) valid = false; });
+      msg.classList.remove("show","ok","err");
+      if(!valid){
+        msg.textContent = "Please fill in all required fields.";
+        msg.classList.add("show","err");
+        return;
+      }
+      // DEMO ONLY: no backend is wired up yet.
+      // See the README "Connecting the forms to a real backend" section
+      // to send this data to Supabase / Resend / your own API route.
+      msg.textContent = successText;
+      msg.classList.add("show","ok");
+      form.reset();
+    });
+  }
+  handleForm("resume-form", "res-msg", "Check your email to confirm your address — your resume will follow.");
+  handleForm("newsletter-form", "nl-msg", "You're subscribed. Welcome aboard!");
+  handleForm("contact-form", "ct-msg", "Message sent — I'll be in touch soon.");
+})();
+</script>
+
+</body>
+</html>
